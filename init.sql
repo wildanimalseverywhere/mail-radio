@@ -269,4 +269,4 @@ ALTER TABLE ONLY public."UserSet"
 
 
 INSERT INTO public."ConfigurationSet" (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey, mailusername, mailuserpassword, maildisplayname)
-	VALUES ({FQDN}, {SUBDOMAIN}, {IPV4}, {IPV6}, {SSHUSER}, {SSHKEY}, {HOSTNAME}, {MAIL_COWAPIKEY}, {MAIL_USER}, {MAIL_PASSWORD}, {MAIL_DISPLAYNAME});
+	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}', '{HOSTNAME}', '{MAIL_COWAPIKEY}', '{MAIL_USER}', '{MAIL_PASSWORD}', '{MAIL_DISPLAYNAME}');

@@ -21,6 +21,10 @@ SET row_security = off;
 --
 
 
+
+
+
+
 --
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
 --
@@ -31,6 +35,49 @@ COMMENT ON SCHEMA public IS 'standard public schema';
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- Name: ConfigurationSet; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ConfigurationSet" (
+    id bigint NOT NULL,
+    fqdn text NOT NULL,
+    subdomainname text NOT NULL,
+    outboundipv4 text NOT NULL,
+    outboundipv6 text NOT NULL,
+    sshusername text NOT NULL,
+    sshprivatekey text NOT NULL,
+    hostname text NOT NULL,
+    mailcowapikey text NOT NULL,
+    mailusername text NOT NULL,
+    mailuserpassword text NOT NULL,
+    maildisplayname text NOT NULL
+);
+
+
+ALTER TABLE public."ConfigurationSet" OWNER TO postgres;
+
+--
+-- Name: ConfigurationSet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."ConfigurationSet_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."ConfigurationSet_id_seq" OWNER TO postgres;
+
+--
+-- Name: ConfigurationSet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."ConfigurationSet_id_seq" OWNED BY public."ConfigurationSet".id;
+
 
 --
 -- Name: RightSet; Type: TABLE; Schema: public; Owner: postgres
@@ -140,6 +187,13 @@ ALTER SEQUENCE public."UserSet_id_seq" OWNED BY public."UserSet".id;
 
 
 --
+-- Name: ConfigurationSet id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ConfigurationSet" ALTER COLUMN id SET DEFAULT nextval('public."ConfigurationSet_id_seq"'::regclass);
+
+
+--
 -- Name: RightSet id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -158,6 +212,14 @@ ALTER TABLE ONLY public."TenantSet" ALTER COLUMN id SET DEFAULT nextval('public.
 --
 
 ALTER TABLE ONLY public."UserSet" ALTER COLUMN id SET DEFAULT nextval('public."UserSet_id_seq"'::regclass);
+
+
+--
+-- Name: ConfigurationSet ConfigurationSet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ConfigurationSet"
+    ADD CONSTRAINT "ConfigurationSet_pkey" PRIMARY KEY (id);
 
 
 --
@@ -204,3 +266,7 @@ ALTER TABLE ONLY public."UserSet"
 -- PostgreSQL database dump complete
 --
 
+
+
+INSERT INTO public."ConfigurationSet" (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey, mailusername, mailuserpassword, maildisplayname)
+	VALUES ({FQDN}, {SUBDOMAIN}, {IPV4}, {IPV6}, {SSHUSER}, {SSHKEY}, {HOSTNAME}, {MAIL_COWAPIKEY}, {MAIL_USER}, {MAIL_PASSWORD}, {MAIL_DISPLAYNAME});

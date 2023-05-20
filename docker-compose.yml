@@ -1,4 +1,7 @@
 version: '3.8'
+networks:
+  mailradio-network:
+    driver: bridge 
 services:
   nginx-app:
     image: 'jc21/nginx-proxy-manager:latest'
@@ -21,11 +24,15 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    networks:
+      - mailradio-network
   mailradioapp:
     image: "jaspalsregistry.azurecr.io/platin-v2-apps-mailradio:latest"
     container_name: "platin.v2.apps.mailradio"
     environment:
-        SQLDB: "Password={DB_PASSWORD};Username={DB_USER};Database=postgres;Host=localhost"
+        SQLDB: "Password={DB_PASSWORD};Username={DB_USER};Database=postgres;Host=postgres-db"
         ASPNETCORE_URLS: "http://+:5000"
     ports:
       - '5000:5000'
+    networks:
+      - mailradio-network

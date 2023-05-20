@@ -33,6 +33,7 @@ services:
     container_name: "platin.v2.apps.mailradio"
     environment:
         SQLDB: "Password={DB_PASSWORD};Username={DB_USER};Database=postgres;Host=postgres-db"
+        CONTROL_KEY: {APP_CONTROL_KEY}
         ASPNETCORE_URLS: "http://+:5000"
     ports:
       - '5000:5000'

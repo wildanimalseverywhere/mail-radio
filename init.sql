@@ -37,15 +37,8 @@ CREATE TABLE ConfigurationSet (
     Outboundipv6 text  NOT NULL,
     Sshusername text  NOT NULL,
     Sshprivatekey text  NOT NULL,
-    Hostname text  NOT NULL,
-    Mailcowapikey text  NOT NULL,
-    InstanceId text  NOT NULL,
-    JWTSecret text  NOT NULL,
     JWTIssuer text  NOT NULL,
     JWTAudience text  NOT NULL,
-    Miniosecret text NULL,
-    Minioaccesskey text NULL,
-    Minioendpoint text NULL
 );
 
 
@@ -363,5 +356,5 @@ ON MailingPropertySet
 
    
 
-INSERT INTO ConfigurationSet (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey,instanceid,jwtsecret,jwtaudience,jwtissuer,Minioendpoint)
-	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}', '{HOSTNAME}', '{MAIL_COWAPIKEY}','{INSTANCEID}','{JWT_SECRET}','{JWT_AUDIENCE}','{JWT_ISSUER}','{MINIO_ENDPOINT}');
+INSERT INTO ConfigurationSet (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey,jwtaudience,jwtissuer)
+	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}','{JWT_AUDIENCE}','{JWT_ISSUER}');

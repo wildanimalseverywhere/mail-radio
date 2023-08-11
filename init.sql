@@ -1,10 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 15.2
--- Dumped by pg_dump version 15.2
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -15,7 +8,7 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
+set schema 'public';
 --
 -- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
 --
@@ -36,237 +29,339 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
---
--- Name: ConfigurationSet; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public."ConfigurationSet" (
-    id bigint NOT NULL,
-    fqdn text NOT NULL,
-    subdomainname text NOT NULL,
-    outboundipv4 text NOT NULL,
-    outboundipv6 text NOT NULL,
-    sshusername text NOT NULL,
-    sshprivatekey text NOT NULL,
-    hostname text NOT NULL,
-    mailcowapikey text NOT NULL,
-    mailusername text NOT NULL,
-    mailuserpassword text NOT NULL,
-    maildisplayname text NOT NULL
+CREATE TABLE ConfigurationSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    Fqdn text  NOT NULL,
+    Subdomainname text  NOT NULL,
+    Outboundipv4 text  NOT NULL,
+    Outboundipv6 text  NOT NULL,
+    Sshusername text  NOT NULL,
+    Sshprivatekey text  NOT NULL,
+    Hostname text  NOT NULL,
+    Mailcowapikey text  NOT NULL,
+    InstanceId text  NOT NULL,
+    JWTSecret text  NOT NULL,
+    JWTIssuer text  NOT NULL,
+    JWTAudience text  NOT NULL,
+    Miniosecret text NULL,
+    Minioaccesskey text NULL,
+    Minioendpoint text NULL
 );
 
 
-ALTER TABLE public."ConfigurationSet" OWNER TO postgres;
-
---
--- Name: ConfigurationSet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public."ConfigurationSet_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public."ConfigurationSet_id_seq" OWNER TO postgres;
-
---
--- Name: ConfigurationSet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public."ConfigurationSet_id_seq" OWNED BY public."ConfigurationSet".id;
-
-
---
--- Name: RightSet; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public."RightSet" (
-    id bigint NOT NULL,
-    name text NOT NULL,
-    fk_userid bigint
+-- SQLINES DEMO *** serSetSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE UserSetSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    UserId text  NOT NULL,
+    UserName text  NOT NULL
 );
 
-
-ALTER TABLE public."RightSet" OWNER TO postgres;
-
---
--- Name: RightSet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public."RightSet_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public."RightSet_id_seq" OWNER TO postgres;
-
---
--- Name: RightSet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public."RightSet_id_seq" OWNED BY public."RightSet".id;
-
-
---
--- Name: TenantSet; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public."TenantSet" (
-    id bigint NOT NULL,
-    name text NOT NULL,
-    createdon date NOT NULL
+-- SQLINES DEMO *** omainSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE DomainSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    DomainName text  NOT NULL,
+    Active boolean  NOT NULL,
+    DomainId text  NOT NULL
 );
 
-
-ALTER TABLE public."TenantSet" OWNER TO postgres;
-
---
--- Name: TenantSet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public."TenantSet_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public."TenantSet_id_seq" OWNER TO postgres;
-
---
--- Name: TenantSet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public."TenantSet_id_seq" OWNED BY public."TenantSet".id;
-
-
---
--- Name: UserSet; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public."UserSet" (
-    id bigint NOT NULL,
-    firstname text NOT NULL,
-    lastname text NOT NULL,
-    email text NOT NULL,
-    passwordhash text NOT NULL,
-    passwordsalt text NOT NULL,
-    createdon date NOT NULL,
-    fk_tenantid bigint NOT NULL
+-- SQLINES DEMO *** ailboxSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailboxSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    Username text  NOT NULL,
+    Password text  NOT NULL,
+    DisplayName text  NOT NULL,
+    MailboxId text  NOT NULL,
+    Domain_Id int  NOT NULL
 );
 
+-- SQLINES DEMO *** ontactSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE ContactSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    Email text  NOT NULL,
+    ContactId text  NOT NULL,
+    CreatedOn timestamp(3)  NOT NULL
+);
 
-ALTER TABLE public."UserSet" OWNER TO postgres;
+-- SQLINES DEMO *** ropertySet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE PropertySet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    PropertyId text  NOT NULL,
+    Name text  NOT NULL,
+    Value text  NOT NULL,
+    Contact_Id int  NOT NULL
+);
 
---
--- Name: UserSet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** ailingListSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailingListSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    MailingListId text  NOT NULL,
+    Name text  NOT NULL
+);
 
-CREATE SEQUENCE public."UserSet_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+-- SQLINES DEMO *** ailingListSubscriptionSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailingListSubscriptionSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    SubscriptionId text  NOT NULL,
+    Subscribed boolean  NOT NULL,
+    ConsentGrantedOn timestamp(3)  NULL,
+    ConsentRemovedOn timestamp(3)  NULL,
+    Contact_Id int  NOT NULL,
+    MailingList_Id int  NOT NULL
+);
 
+-- SQLINES DEMO *** ailTemplateSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailTemplateSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    TemplateId text  NOT NULL,
+    Name text  NOT NULL,
+    Description text  NULL,
+    CreatedOn timestamp(3)  NOT NULL,
+    Content text  NULL
+);
 
-ALTER TABLE public."UserSet_id_seq" OWNER TO postgres;
+-- SQLINES DEMO *** ailingSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailingSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    TemplateId text  NULL,
+    MailingId text  NOT NULL,
+    MailingListId text  NULL,
+    CreatedOn timestamp(3)  NOT NULL,
+    Subject text  NOT NULL,
+    MailingType int  NOT NULL,
+    Mailbox_Id int  NOT NULL
+);
 
---
--- Name: UserSet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** ailingMailSet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailingMailSet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    MailId text  NOT NULL,
+    ContactId text  NULL,
+    Status int  NOT NULL,
+    ContentUrl text  NOT NULL,
+    ToSendOn timestamp(3)  NOT NULL,
+    RecipientEmail text  NULL,
+    RecipientDisplayName text  NULL,
+    Mailing_Id int  NOT NULL
+);
 
-ALTER SEQUENCE public."UserSet_id_seq" OWNED BY public."UserSet".id;
+-- SQLINES DEMO *** ailingPropertySet'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE MailingPropertySet (
+    Id int GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+    Name text  NOT NULL,
+    Value text  NOT NULL,
+    PropertyId text  NOT NULL,
+    Mailing_Id int  NOT NULL
+);
 
+-- SQLINES DEMO *** ---------------------------------
+-- SQLINES DEMO *** ARY KEY constraints
+-- SQLINES DEMO *** ---------------------------------
 
---
--- Name: ConfigurationSet id; Type: DEFAULT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** key on [Id] in table 'ConfigurationSet'
+ALTER TABLE ConfigurationSet
+ADD CONSTRAINT PK_ConfigurationSet
+    PRIMARY KEY (Id);
+ 
 
-ALTER TABLE ONLY public."ConfigurationSet" ALTER COLUMN id SET DEFAULT nextval('public."ConfigurationSet_id_seq"'::regclass);
+-- SQLINES DEMO *** key on [Id] in table 'UserSetSet'
+ALTER TABLE UserSetSet
+ADD CONSTRAINT PK_UserSetSet
+    PRIMARY KEY (Id);
+ 
 
+-- SQLINES DEMO *** key on [Id] in table 'DomainSet'
+ALTER TABLE DomainSet
+ADD CONSTRAINT PK_DomainSet
+    PRIMARY KEY (Id);
+ 
 
---
--- Name: RightSet id; Type: DEFAULT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** key on [Id] in table 'MailboxSet'
+ALTER TABLE MailboxSet
+ADD CONSTRAINT PK_MailboxSet
+    PRIMARY KEY (Id);
+ 
 
-ALTER TABLE ONLY public."RightSet" ALTER COLUMN id SET DEFAULT nextval('public."RightSet_id_seq"'::regclass);
+-- SQLINES DEMO *** key on [Id] in table 'ContactSet'
+ALTER TABLE ContactSet
+ADD CONSTRAINT PK_ContactSet
+    PRIMARY KEY (Id);
+ 
 
+-- SQLINES DEMO *** key on [Id] in table 'PropertySet'
+ALTER TABLE PropertySet
+ADD CONSTRAINT PK_PropertySet
+    PRIMARY KEY (Id);
+ 
 
---
--- Name: TenantSet id; Type: DEFAULT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** key on [Id] in table 'MailingListSet'
+ALTER TABLE MailingListSet
+ADD CONSTRAINT PK_MailingListSet
+    PRIMARY KEY (Id);
+ 
 
-ALTER TABLE ONLY public."TenantSet" ALTER COLUMN id SET DEFAULT nextval('public."TenantSet_id_seq"'::regclass);
+-- SQLINES DEMO *** key on [Id] in table 'MailingListSubscriptionSet'
+ALTER TABLE MailingListSubscriptionSet
+ADD CONSTRAINT PK_MailingListSubscriptionSet
+    PRIMARY KEY (Id);
+ 
 
+-- SQLINES DEMO *** key on [Id] in table 'MailTemplateSet'
+ALTER TABLE MailTemplateSet
+ADD CONSTRAINT PK_MailTemplateSet
+    PRIMARY KEY (Id);
+ 
 
---
--- Name: UserSet id; Type: DEFAULT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** key on [Id] in table 'MailingSet'
+ALTER TABLE MailingSet
+ADD CONSTRAINT PK_MailingSet
+    PRIMARY KEY (Id);
+ 
 
-ALTER TABLE ONLY public."UserSet" ALTER COLUMN id SET DEFAULT nextval('public."UserSet_id_seq"'::regclass);
+-- SQLINES DEMO *** key on [Id] in table 'MailingMailSet'
+ALTER TABLE MailingMailSet
+ADD CONSTRAINT PK_MailingMailSet
+    PRIMARY KEY (Id);
+ 
 
+-- SQLINES DEMO *** key on [Id] in table 'MailingPropertySet'
+ALTER TABLE MailingPropertySet
+ADD CONSTRAINT PK_MailingPropertySet
+    PRIMARY KEY (Id);
+ 
 
---
--- Name: ConfigurationSet ConfigurationSet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** ---------------------------------
+-- SQLINES DEMO *** IGN KEY constraints
+-- SQLINES DEMO *** ---------------------------------
 
-ALTER TABLE ONLY public."ConfigurationSet"
-    ADD CONSTRAINT "ConfigurationSet_pkey" PRIMARY KEY (id);
+-- SQLINES DEMO *** key on [Domain_Id] in table 'MailboxSet'
+ALTER TABLE MailboxSet
+ADD CONSTRAINT FK_DomainMailbox
+    FOREIGN KEY (Domain_Id)
+    REFERENCES DomainSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_DomainMailbox'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_DomainMailbox
+ON MailboxSet
+    (Domain_Id);
+ 
 
---
--- Name: RightSet RightSet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** key on [Contact_Id] in table 'PropertySet'
+ALTER TABLE PropertySet
+ADD CONSTRAINT FK_ContactProperty
+    FOREIGN KEY (Contact_Id)
+    REFERENCES ContactSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
-ALTER TABLE ONLY public."RightSet"
-    ADD CONSTRAINT "RightSet_pkey" PRIMARY KEY (id);
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_ContactProperty'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_ContactProperty
+ON PropertySet
+    (Contact_Id);
+ 
 
+-- SQLINES DEMO *** key on [Contact_Id] in table 'MailingListSubscriptionSet'
+ALTER TABLE MailingListSubscriptionSet
+ADD CONSTRAINT FK_ContactMailingListSubscription
+    FOREIGN KEY (Contact_Id)
+    REFERENCES ContactSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
---
--- Name: TenantSet TenantSet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_ContactMailingListSubscription'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_ContactMailingListSubscription
+ON MailingListSubscriptionSet
+    (Contact_Id);
+ 
 
-ALTER TABLE ONLY public."TenantSet"
-    ADD CONSTRAINT "TenantSet_pkey" PRIMARY KEY (id);
+-- SQLINES DEMO *** key on [MailingList_Id] in table 'MailingListSubscriptionSet'
+ALTER TABLE MailingListSubscriptionSet
+ADD CONSTRAINT FK_MailingListMailingListSubscription
+    FOREIGN KEY (MailingList_Id)
+    REFERENCES MailingListSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_MailingListMailingListSubscription'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_MailingListMailingListSubscription
+ON MailingListSubscriptionSet
+    (MailingList_Id);
+ 
 
---
--- Name: UserSet UserSet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** key on [Mailbox_Id] in table 'MailingSet'
+ALTER TABLE MailingSet
+ADD CONSTRAINT FK_MailboxMailing
+    FOREIGN KEY (Mailbox_Id)
+    REFERENCES MailboxSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
-ALTER TABLE ONLY public."UserSet"
-    ADD CONSTRAINT "UserSet_pkey" PRIMARY KEY (id);
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_MailboxMailing'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_MailboxMailing
+ON MailingSet
+    (Mailbox_Id);
+ 
 
+-- SQLINES DEMO *** key on [Mailing_Id] in table 'MailingMailSet'
+ALTER TABLE MailingMailSet
+ADD CONSTRAINT FK_MailingMailingMail
+    FOREIGN KEY (Mailing_Id)
+    REFERENCES MailingSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
---
--- Name: RightSet right_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_MailingMailingMail'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_MailingMailingMail
+ON MailingMailSet
+    (Mailing_Id);
+ 
 
-ALTER TABLE ONLY public."RightSet"
-    ADD CONSTRAINT right_user FOREIGN KEY (fk_userid) REFERENCES public."UserSet"(id);
+-- SQLINES DEMO *** key on [Mailing_Id] in table 'MailingPropertySet'
+ALTER TABLE MailingPropertySet
+ADD CONSTRAINT FK_MailingMailingPayload
+    FOREIGN KEY (Mailing_Id)
+    REFERENCES MailingSet
+        (Id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+ 
 
+-- SQLINES DEMO *** tered index for FOREIGN KEY 'FK_MailingMailingPayload'
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE INDEX IX_FK_MailingMailingPayload
+ON MailingPropertySet
+    (Mailing_Id);
+ 
 
---
--- Name: UserSet user_tenant; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
+-- SQLINES DEMO *** ---------------------------------
+-- Script has ended
+-- SQLINES DEMO *** ---------------------------------
+ 
 
-ALTER TABLE ONLY public."UserSet"
-    ADD CONSTRAINT user_tenant FOREIGN KEY (fk_tenantid) REFERENCES public."TenantSet"(id);
+   
 
-
---
--- PostgreSQL database dump complete
---
-
-
-
-INSERT INTO public."ConfigurationSet" (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey, mailusername, mailuserpassword, maildisplayname)
-	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}', '{HOSTNAME}', '{MAIL_COWAPIKEY}', '{MAIL_USER}', '{MAIL_PASSWORD}', '{MAIL_DISPLAYNAME}');
+INSERT INTO ConfigurationSet (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey,instanceid,jwtsecret,jwtaudience,jwtissuer,Miniosecret,Minioaccesskey,Minioendpoint)
+	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}', '{HOSTNAME}', '{MAIL_COWAPIKEY}','{INSTANCEID}','{JWT_SECRET}','{JWT_AUDIENCE}','{JWT_ISSUER}','{MINIO_SECRET}','{MINIO_ACCESSKEY}','{MINIO_ENDPOINT}');

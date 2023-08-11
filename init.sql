@@ -352,7 +352,19 @@ ON MailingPropertySet
 -- SQLINES DEMO *** ---------------------------------
 -- Script has ended
 -- SQLINES DEMO *** ---------------------------------
- 
+
+ALTER TABLE public."configurationset" OWNER TO postgres;
+ALTER TABLE public."contactset" OWNER TO postgres;
+ALTER TABLE public."domainset" OWNER TO postgres;
+ALTER TABLE public."mailboxset" OWNER TO postgres;
+ALTER TABLE public."mailinglistset" OWNER TO postgres;
+ALTER TABLE public."mailinglistsubscriptionset" OWNER TO postgres;
+ALTER TABLE public."mailingmailset" OWNER TO postgres;
+ALTER TABLE public."mailingpropertyset" OWNER TO postgres;
+ALTER TABLE public."mailingset" OWNER TO postgres;
+ALTER TABLE public."mailtemplateset" OWNER TO postgres;
+ALTER TABLE public."propertyset" OWNER TO postgres;
+ALTER TABLE public."usersetset" OWNER TO postgres;
 
    
 

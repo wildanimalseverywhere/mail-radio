@@ -41,6 +41,8 @@ services:
       MINIO_ACCESS_KEY: {MINIO_USER}
       MINIO_SECRET_KEY: {MINIO_PASSWORD}
     command: server --console-address ":9001" /data
+    networks:
+      - mailradio-network
   mailradioapp:
     image: "jaspalsregistry.azurecr.io/platin-v2-apps-mailradio:latest"
     container_name: "platin.v2.apps.mailradio"

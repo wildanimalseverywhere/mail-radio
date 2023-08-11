@@ -363,5 +363,5 @@ ON MailingPropertySet
 
    
 
-INSERT INTO ConfigurationSet (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey,instanceid,jwtsecret,jwtaudience,jwtissuer,Miniosecret,Minioaccesskey,Minioendpoint)
-	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}', '{HOSTNAME}', '{MAIL_COWAPIKEY}','{INSTANCEID}','{JWT_SECRET}','{JWT_AUDIENCE}','{JWT_ISSUER}','{MINIO_SECRET}','{MINIO_ACCESSKEY}','{MINIO_ENDPOINT}');
+INSERT INTO ConfigurationSet (fqdn, subdomainname, outboundipv4, outboundipv6, sshusername, sshprivatekey, hostname, mailcowapikey,instanceid,jwtsecret,jwtaudience,jwtissuer,Minioendpoint)
+	VALUES ('{FQDN}', '{SUBDOMAIN}', '{IPV4}', '{IPV6}', '{SSHUSER}', '{SSHKEY}', '{HOSTNAME}', '{MAIL_COWAPIKEY}','{INSTANCEID}','{JWT_SECRET}','{JWT_AUDIENCE}','{JWT_ISSUER}','{MINIO_ENDPOINT}');

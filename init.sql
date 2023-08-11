@@ -38,7 +38,7 @@ CREATE TABLE ConfigurationSet (
     Sshusername text  NOT NULL,
     Sshprivatekey text  NOT NULL,
     JWTIssuer text  NOT NULL,
-    JWTAudience text  NOT NULL,
+    JWTAudience text  NOT NULL
 );
 
 
